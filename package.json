@@ -1,0 +1,14 @@
+{
+  "name": "load-and-clash",
+  "version": "1.0.0",
+  "description": "Online 1v1 simultaneous-move duel game: load up, unlock attacks, pick the right defense.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js"
+  }
+}

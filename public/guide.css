@@ -1,0 +1,84 @@
+/* The friends guide page. Builds on style.css. */
+
+.guide {
+  display: grid;
+  gap: 32px;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px var(--gutter) 64px;
+}
+
+.guide-head { display: grid; gap: 12px; }
+.guide h1 { font-size: 38px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; }
+.guide h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 10px; }
+.guide .lead { color: var(--muted); font-size: 19px; max-width: 56ch; }
+.guide .back { font-size: 15px; color: var(--muted); }
+
+.guide section { break-inside: avoid; }
+
+.guide .steps {
+  display: grid;
+  gap: 10px;
+  padding-left: 24px;
+  list-style: decimal;
+  max-width: 62ch;
+}
+.guide .steps li::marker { color: var(--muted); font-weight: 700; }
+
+.guide .plain {
+  display: grid;
+  gap: 10px;
+  padding-left: 20px;
+  list-style: disc;
+  max-width: 62ch;
+}
+
+.guide .rules-table { margin-top: 16px; max-width: 520px; }
+
+.guide .keys {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px 14px;
+}
+.guide .keys li { display: flex; align-items: center; gap: 10px; }
+.guide kbd { display: inline-block; }
+
+@media (max-width: 640px) {
+  .guide { gap: 26px; padding-top: 16px; }
+  .guide h1 { font-size: 30px; }
+  .guide .lead { font-size: 17px; }
+}
+
+/* Printing or saving as PDF: light page, dark text. */
+@media print {
+  :root {
+    color-scheme: light;
+    --bg: #ffffff;
+    --surface: #f1f2fa;
+    --surface-2: #e3e6f6;
+    --line: #c9cee8;
+    --field: #ffffff;
+    --text: #14172b;
+    --muted: #4a5078;
+  }
+  html, body { background: #fff; }
+  body { color: var(--text); font-size: 13px; line-height: 1.4; }
+  .guide { gap: 14px; padding: 0; max-width: none; }
+  .guide section { break-inside: auto; }
+  .guide section[aria-labelledby="g-special"],
+  .guide section[aria-labelledby="g-win"] { break-inside: avoid; }
+  .guide h1 { font-size: 26px; }
+  .guide h2 { font-size: 17px; margin-bottom: 5px; break-after: avoid; }
+  .guide .lead { font-size: 14px; }
+  .guide .back { display: none; }
+  .guide .steps,
+  .guide .plain { gap: 5px; max-width: none; }
+  .guide li { break-inside: avoid; }
+  .guide .rules-table,
+  .guide .keys { break-inside: avoid; }
+  .guide .rules-table { margin-top: 10px; font-size: 13px; }
+  .guide .rules-table th,
+  .guide .rules-table td { padding: 5px 10px 5px 0; }
+  .guide .keys { gap: 6px 14px; }
+  .guide kbd { background: #fff; }
+}

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to play Load &amp; Clash</title>
+  <meta name="description" content="Join a game and learn the rules of Load &amp; Clash in two minutes.">
+  <meta name="theme-color" content="#1c2038">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&amp;display=swap">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="guide.css">
+</head>
+<body>
+  <main class="guide">
+    <header class="guide-head">
+      <a class="back textlink" href="/">Back to the game</a>
+      <h1>How to play Load &amp; Clash</h1>
+      <p class="lead">A duel for two players. Build up points, unlock stronger attacks, and pick the right defense before the 5-second timer runs out.</p>
+    </header>
+
+    <section aria-labelledby="g-join">
+      <h2 id="g-join">Join a game</h2>
+      <ol class="steps">
+        <li>Open the link your friend sent you. It works on a phone, tablet or laptop.</li>
+        <li>No link? Open the game website, type the 5-letter room code into <strong>Room code</strong>, and tap <strong>Join room</strong>.</li>
+        <li>Type your name and tap <strong>Join room</strong>. The game starts as soon as you are both in.</li>
+        <li>Keep the page open while you play. If the first page load takes up to a minute, the game server is waking up. Just wait.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="g-round">
+      <h2 id="g-round">How a round works</h2>
+      <ol class="steps">
+        <li>Both players pick a move in secret. You have <strong>5 seconds</strong>.</li>
+        <li>Tap a move, then tap <strong>Lock in</strong>. On a laptop, press the move's key and then <kbd>Enter</kbd>.</li>
+        <li>If time runs out before you lock in, <strong>Load is played for you</strong>.</li>
+        <li>Both moves are shown, the scores change, and the next round starts right away.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="g-moves">
+      <h2 id="g-moves">Your moves</h2>
+      <ul class="plain">
+        <li><strong>Load</strong> adds 1 point to your score.</li>
+        <li><strong>Defend</strong> with <strong>Mag</strong>, <strong>N.V</strong>, <strong>Shield</strong> or <strong>Rebound</strong>. You can use any defense at any time.</li>
+        <li><strong>Attack</strong> once your score has reached the attack's number. Everyone starts at 0, so you have to Load first.</li>
+      </ul>
+      <table class="rules-table">
+        <caption class="sr-only">Attacks, the score that unlocks them, and the defenses that answer them</caption>
+        <thead>
+          <tr><th scope="col">Attack</th><th scope="col">Unlocks at</th><th scope="col">Answered by</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Path</td><td>1</td><td><span class="chips"><span class="chip"><i class="dot mag"></i>Mag</span><span class="chip"><i class="dot nv"></i>N.V</span></span></td></tr>
+          <tr><td>Boss</td><td>2</td><td><span class="chips"><span class="chip"><i class="dot shield"></i>Shield</span></span></td></tr>
+          <tr><td>Dam</td><td>3</td><td><span class="chips"><span class="chip"><i class="dot mag"></i>Mag</span></span></td></tr>
+          <tr><td>ICY</td><td>4</td><td><span class="chips"><span class="chip"><i class="dot nv"></i>N.V</span></span></td></tr>
+          <tr><td>Touch E</td><td>5</td><td><span class="chips"><span class="chip"><i class="dot rebound"></i>Rebound</span></span></td></tr>
+          <tr><td>Storm</td><td>7</td><td><span class="chips"><span class="chip"><i class="dot nv"></i>N.V</span></span></td></tr>
+          <tr><td>Beast</td><td>10</td><td><span class="chips"><span class="chip"><i class="dot shield"></i>Shield</span></span></td></tr>
+          <tr><td>Professor</td><td>12</td><td><span class="chips"><span class="chip"><i class="dot mag"></i>Mag</span></span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section aria-labelledby="g-win">
+      <h2 id="g-win">How you win</h2>
+      <ul class="plain">
+        <li>You attack and your opponent <strong>does not</strong> use the matching defense (or is loading): <strong>you win</strong>.</li>
+        <li>You attack and your opponent uses the matching defense: <strong>you lose points</strong> equal to the attack's number.</li>
+        <li>You are attacked and you use the matching defense: you are safe, and the attacker loses points.</li>
+        <li>You are attacked and you do <strong>not</strong> use the matching defense: <strong>you lose</strong>.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="g-special">
+      <h2 id="g-special">Special rules</h2>
+      <ul class="plain">
+        <li><strong>Dam</strong> against <strong>Rebound</strong>: the player who used Dam loses.</li>
+        <li><strong>Touch E</strong> against <strong>Rebound</strong>: the two scores are swapped.</li>
+        <li><strong>Touch E</strong> against any other defense, or against Load: the Touch E player takes the other player's whole score.</li>
+        <li><strong>Touch E</strong> against any other attack: the Touch E player loses.</li>
+        <li>Both players attack: the bigger attack wins the game. If both use the same attack, each of you loses that many points and the game goes on.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="g-keys">
+      <h2 id="g-keys">Keyboard keys (laptop)</h2>
+      <ul class="keys">
+        <li><kbd>L</kbd> Load</li>
+        <li><kbd>Q</kbd> Mag</li>
+        <li><kbd>W</kbd> N.V</li>
+        <li><kbd>E</kbd> Shield</li>
+        <li><kbd>R</kbd> Rebound</li>
+        <li><kbd>A</kbd> Path</li>
+        <li><kbd>S</kbd> Boss</li>
+        <li><kbd>D</kbd> Dam</li>
+        <li><kbd>F</kbd> ICY</li>
+        <li><kbd>G</kbd> Touch E</li>
+        <li><kbd>H</kbd> Storm</li>
+        <li><kbd>J</kbd> Beast</li>
+        <li><kbd>K</kbd> Professor</li>
+        <li><kbd>Enter</kbd> Lock in</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="g-tips">
+      <h2 id="g-tips">Tips for your first game</h2>
+      <ul class="plain">
+        <li>Start with Load. Your opponent's score shows which attacks they can use, so keep an eye on it.</li>
+        <li>Each attack has colored dots. They show which defense answers it.</li>
+        <li>Switching to another app can drop your connection. The timer pauses until you are back.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

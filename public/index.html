@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Load &amp; Clash</title>
+  <meta name="description" content="A two-player duel. Load up to unlock stronger attacks, and pick the defense that stops your opponent's.">
+  <meta name="theme-color" content="#1c2038">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&amp;display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1 class="brand">Load &amp; Clash</h1>
+      <div class="roomtag" id="roomtag" hidden>
+        <span>Room <strong id="roomcode"></strong></span>
+        <button type="button" class="quiet" id="btn-leave">Leave</button>
+      </div>
+    </header>
+
+    <p id="conn" class="conn" role="status" hidden>Connection lost. Trying to reconnect.</p>
+    <p id="notice" class="notice" role="alert" hidden></p>
+
+    <!-- Lobby -->
+    <section id="view-lobby" class="view lobby" aria-label="Start or join a game">
+      <div class="hero">
+        <div class="meter hero-meter" id="hero-meter" role="img" aria-label="A score meter from 1 to 12. Attacks unlock at 1, 2, 3, 4, 5, 7, 10 and 12."></div>
+        <ul class="legend" aria-label="Defense colors">
+          <li><i class="dot mag"></i>Mag</li>
+          <li><i class="dot nv"></i>N.V</li>
+          <li><i class="dot shield"></i>Shield</li>
+          <li><i class="dot rebound"></i>Rebound</li>
+        </ul>
+        <p class="lead">Load to build your score. Each notch unlocks an attack, and its color shows the defense that answers it. You get 5 seconds to choose each round.</p>
+      </div>
+
+      <div class="form">
+        <p id="invite-note" class="invite" hidden>You've been invited to room <strong id="invite-code"></strong>. Enter your name and join.</p>
+
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" type="text" maxlength="16" autocomplete="nickname" placeholder="Player">
+        </div>
+
+        <div id="create-block" class="block">
+          <button id="btn-create" class="primary" type="button">Create room</button>
+          <p class="hint">You'll get a link to send to your opponent.</p>
+        </div>
+
+        <form id="join-form" class="block" autocomplete="off">
+          <div class="field">
+            <label for="code">Room code</label>
+            <input id="code" type="text" maxlength="5" autocapitalize="characters" spellcheck="false" placeholder="K7QMX">
+          </div>
+          <button id="btn-join" class="secondary" type="submit">Join room</button>
+        </form>
+
+        <button id="btn-show-create" class="linklike" type="button" hidden>Create your own room instead</button>
+        <p class="hint">New here? <a class="textlink" href="guide.html">Read the quick guide</a></p>
+      </div>
+    </section>
+
+    <!-- Waiting for the second player -->
+    <section id="view-waiting" class="view waiting" hidden aria-label="Waiting for opponent">
+      <h2>Waiting for your opponent</h2>
+      <p>Send them this link, or give them the room code <strong id="waiting-code"></strong>.</p>
+      <div class="copyrow">
+        <input id="invite-link" type="text" readonly aria-label="Invite link">
+        <button id="btn-copy" class="secondary" type="button">Copy link</button>
+      </div>
+      <p class="hint">Keep this tab open. The game starts as soon as they join.</p>
+    </section>
+
+    <!-- The game -->
+    <section id="view-game" class="view game" hidden aria-label="Game">
+      <div id="banner" class="banner" hidden>
+        <h2 id="banner-title"></h2>
+        <p id="banner-text"></p>
+        <button id="btn-rematch" class="primary" type="button">Play again</button>
+        <p id="rematch-note" class="hint"></p>
+      </div>
+
+      <div class="layout">
+        <div class="main">
+        <div class="duel">
+          <section class="side you" aria-labelledby="you-name">
+            <h2 id="you-name" class="name"></h2>
+            <p class="score"><span class="sr-only">Score </span><span id="you-score">0</span></p>
+            <div class="meter" id="you-meter" role="img"></div>
+            <p class="caption" id="you-caption"></p>
+          </section>
+          <section class="side opp" aria-labelledby="opp-name">
+            <h2 id="opp-name" class="name"></h2>
+            <p class="score"><span class="sr-only">Score </span><span id="opp-score">0</span></p>
+            <div class="meter" id="opp-meter" role="img"></div>
+            <p class="caption" id="opp-caption"></p>
+          </section>
+        </div>
+
+        <div id="timer" class="timer" role="timer" aria-live="off" hidden>
+          <div class="timer-track"><span id="timer-fill" class="timer-fill"></span></div>
+          <span id="timer-num" class="timer-num">5</span>
+        </div>
+        <p id="status" class="status" role="status"></p>
+
+        <div id="picker" class="picker">
+          <div class="col col-def">
+            <h2>Defend</h2>
+            <p class="desc">Use any time.</p>
+            <div class="stack" id="g-def"></div>
+          </div>
+          <div class="col col-load">
+            <h2>Load</h2>
+            <p class="desc">Gain 1 point.</p>
+            <div class="stack" id="g-load"></div>
+          </div>
+          <div class="col col-atk">
+            <h2>Attack</h2>
+            <p class="desc">Needs this score.</p>
+            <div class="stack" id="g-atk"></div>
+          </div>
+        </div>
+
+        <div class="lockbar" id="lockbar">
+          <p id="selection" class="selection">Choose a move</p>
+          <button id="btn-lock" class="primary" type="button" disabled>Lock in <kbd>Enter</kbd></button>
+        </div>
+        </div>
+
+        <aside class="results" aria-label="Round results">
+          <section id="reveal" class="reveal" hidden aria-labelledby="reveal-title">
+            <h2 id="reveal-title"></h2>
+            <div class="clash">
+              <div class="played you">
+                <span class="who">You</span>
+                <strong class="mv" id="rv-you"></strong>
+              </div>
+              <span class="vs">vs</span>
+              <div class="played opp">
+                <span class="who" id="rv-opp-name"></span>
+                <strong class="mv" id="rv-opp"></strong>
+              </div>
+            </div>
+            <p id="rv-text" class="rv-text" aria-live="polite"></p>
+          </section>
+          <p id="results-empty" class="results-empty">Round results appear here.</p>
+          <details class="log" id="log-box">
+            <summary id="log-summary">Round log</summary>
+            <ol id="log"></ol>
+          </details>
+        </aside>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <details class="howto">
+        <summary>How to play</summary>
+        <div id="rules-body"></div>
+      </details>
+    </footer>
+  </main>
+</body>
+</html>
