@@ -1,6 +1,6 @@
 # Load & Clash
 
-An online 1v1 duel game. Both players pick a move in secret each round, build up their score with **Load**, unlock stronger attacks, and try to pick the defense that stops their opponent's attack. Each round has a 5-second timer.
+An online 1v1 duel game. players pick a move in secret each round, build up their score with **Load**, unlock stronger attacks, and try to pick the defense that stops their opponent's attack. Each round has a 5-second timer.
 
 "Load & Clash" is a placeholder name. Change it in `public/index.html` and `public/guide.html` (the `<title>` and the `<h1>`).
 
